@@ -18,8 +18,6 @@
 
 [Chapter 8b - Github](https://khbae.github.io/r-project-lecture/08_gitbub/github_2.html)
 
-[Chapter 8b - Github](https://khbae.github.io/r-project-lecture/08_gitbub/github_2.html)
-
 [Chapter 9 - Shiny](https://khbae.github.io/r-project-lecture/09_shiny/Rshiny강의안.html)
 
 [Chapter 10 - Macro](https://khbae.github.io/r-project-lecture/10_SAS/rmd_macro_in_r.html)
