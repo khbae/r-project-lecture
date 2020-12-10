@@ -1,0 +1,68 @@
+---
+title: "Untitled"
+author: "hyo"
+date: '2020 4 3 '
+output: html_document
+---
+##### 문제1
+* 다음 데이터를 벡터 x에 다음 숫자열이 입력되어 있다
+
+![](C:/Users/haley/Desktop/haley/task/Rbasic/statistic_lecture/basic123/q1.jpg)  
+
+* 1) 벡터 x의 값중 20 이상인 것만 출력하라.
+* 2) 벡터 x의 값중 20 이상인 숫자를 100으로 바꾸어 y로 저장하여라.
+
+
+##### 문제2
+* 1부터 100까지 짝수로 이루어진 숫자만을 x에 벡터로 저장하시오
+
+![](C:/Users/haley/Desktop/haley/task/Rbasic/statistic_lecture/basic123/q2.jpg)  
+
+
+##### 문제3
+* for문을 활용하여 1~1000까지의 합을 구하시오
+
+
+##### 문제4
+*동전을 n번 던져서 앞면이 나올 확률을 구하는 함수를 만드시오 Function에 매개변수 n(번)을 받아 확률이 나오게끔 하시오
+
+
+##### 문제5
+* 원주율을 구하는 공식은 다음과 같다.
+* 아래 공식과 for문을 활용하여 원주율을 계산하는 함수를 만드시오
+
+![](C:/Users/haley/Desktop/haley/task/Rbasic/statistic_lecture/basic123/q5.jpg) 
+
+
+##### 문제6
+* X1,x2 두개의 matrix를 만들고 x3와 같이 열병합을 하시오
+
+![](C:/Users/haley/Desktop/haley/task/Rbasic/statistic_lecture/basic123/q6.jpg) 
+
+##### 문제7
+* 아래와 같이 데이터 프레임을 만들고
+* 1)	M,F,I를 1,2,3으로 코딩하시오
+* 2)	AG가 20이고 GE 가 F만 추출
+* 3)	GE 가 M인 AG의 평균을 구하시오
+
+![](C:/Users/haley/Desktop/haley/task/Rbasic/statistic_lecture/basic123/q7.jpg) 
+
+
+
+##### 문제8
+* X = c(“qweerf=-123adklad”, “dklaj456asddfg”)
+  + 위 벡터에서 숫자만을 추출하시오(gsub 활용)
+  + `^`를 안에다가 사용할 결우 not의 의미가 된다
+
+##### 문제9
+* 아래의 a,b벡터를 만들고
+  + Paste를 활용하여 c를 만들어보시오
+  
+![](C:/Users/haley/Desktop/haley/task/Rbasic/statistic_lecture/basic123/q9.jpg) 
+
+
+
+##### 문제10
+* x = "adefa"가 주어졌을때 'a'들의 위치를 출력하는 함수를 만드시오
+  + (nchar, substr 사용)
+

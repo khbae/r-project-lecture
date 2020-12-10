@@ -1,0 +1,64 @@
+---
+title: "데이터처리 실습 문제"
+author: "hyo"
+date: '2020 4 5'
+output: html_document
+---
+##### 문제1
+* x = c(0.3113,0.22313,0.324,1.2) 벡터를 만든 후 
+  + 각 값들의 제곱의 지수값을 구한뒤
+  + 소수 셋째 자리까지 반올림 하시오
+  + `%>%` 연산자 사용
+
+
+##### 문제2
+* working directory에 있는 iris.csv를 읽는다
+  + head()와 tail()을 활용하여 각 10개의 데이터씩 출력해보자
+
+
+
+##### 문제3
+* 위 iris 데이터에서 Name변수들이 어떤것들이 있는지 확인하시오
+  + 각각의 갯수 확인해보시오
+  + 확인 후 Name별 데이터를 만들어보시오
+
+
+##### 문제4
+* iris의Name을 그룹을 나누어 PetalWidth의 최댓값,최솟값을 구하시오
+  + by를 사용
+  + aggregate 사용
+
+
+##### 문제5
+* iris데이터에서 PetalWidth가 1.3이상인 데이터만을 추출 하여 
+SepalLength와 PetalWidth의 평균값을 `len`이라는 변수이름으로 
+파생변수를 생성해보시오
+  + 변수는 PetalWidth와 SepalWidth 선택
+
+
+##### 문제6
+* iris데이터 변수 SepalLength, SepalWidth, PetalLength, PetalWidth에 대한 중앙값(median)을  Name별로 구하시오
+
+
+##### 문제7
+* 첫번째 표를 두번째 표형식으로 바꾸어라
+![](C:/Users/haley/Desktop/haley/task/Rbasic/statistic_lecture/데이터처리/cap2.PNG)
+
+![](C:/Users/haley/Desktop/haley/task/Rbasic/statistic_lecture/데이터처리/cap3.PNG)
+
+
+##### 문제8
+* iris Name에서 `-`기준으로 iris, name을 분해하여 "iris"는 삭제하고 Name만 Name1 변수로 생성하시오
+
+
+##### 문제9
+* gold mining company, Freeport-McMoRan Inc. (FCX) 데이터  01-Jan-2015 to 18-Mar-2020기간의 데이터 이다
+  + 데이터를 읽은 후 Date를 년(year),월(month),일(day)로 분해한 뒤 년,월 정보를 다시 합쳐 Date1만을 남긴다
+  + 월이 10,11,12월의 데이터만을 추출
+  + 종가(Adj_Close) 변수와 Date1변수만을 출력하시오 
+
+
+##### 문제10
+* 아래 2개의 데이터를 만들어  tb1,tb2데이터를 Date1기준으로 테이블을 합치시오
+![](C:/Users/haley/Desktop/haley/task/Rbasic/statistic_lecture/데이터처리/t1.PNG)
+![](C:/Users/haley/Desktop/haley/task/Rbasic/statistic_lecture/데이터처리/t2.PNG)

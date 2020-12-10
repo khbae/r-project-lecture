@@ -1,0 +1,153 @@
+---
+title: "Untitled"
+author: "hyo"
+date: '2020 4 3 '
+output: html_document
+---
+##### 문제1
+* 다음 데이터를 벡터 x에 다음 숫자열이 입력되어 있다
+
+![](C:/Users/haley/Desktop/haley/task/Rbasic/statistic_lecture/basic123/q1.jpg)  
+
+* 1) 벡터 x의 값중 20 이상인 것만 출력하라.
+* 2) 벡터 x의 값중 20 이상인 숫자를 100으로 바꾸어 y로 저장하여라.
+```{r}
+x=c(17, 16, 20, 24, 22, 15, 21, 18)
+x
+
+#1.(1)
+x[which(x>=20)]
+
+#1.(2)
+x[which(x>=20)]=100
+y = x
+y
+```
+
+##### 문제2
+* 1부터 100까지 짝수로 이루어진 숫자만을 x에 벡터로 저장하시오
+
+![](C:/Users/haley/Desktop/haley/task/Rbasic/statistic_lecture/basic123/q2.jpg)  
+```{r}
+x = seq(2,100,2)
+x
+```
+
+##### 문제3
+* for문을 활용하여 1~1000까지의 합을 구하시오
+```{r}
+sum1000 = 0
+for(n in 1:1000){
+ sum1000 = sum1000 + n
+}
+sum1000
+```
+
+##### 문제4
+*동전을 n번 던져서 앞면이 나올 확률을 구하는 함수를 만드시오 Function에 매개변수 n(번)을 받아 확률이 나오게끔 하시오
+```{r}
+coin = function(n){ #n : 동전 던진 횟수
+	cnt = 0
+	for(i in 1:x){
+		p = round(runif(1,0,1))
+		if(p == 1){ #1: 앞면
+			cnt = cnt+1
+		}
+	}
+	return(cnt/x)
+}
+coin(8)
+```
+
+##### 문제5
+* 원주율을 구하는 공식은 다음과 같다.
+* 아래 공식과 for문을 활용하여 원주율을 계산하는 함수를 만드시오
+
+![](C:/Users/haley/Desktop/haley/task/Rbasic/statistic_lecture/basic123/q5.jpg) 
+
+```{r} 
+x = 1000000
+pi = 0
+for(i in 1:x){
+   if(i%%2 == 1){
+      pi = pi + 4/(2*i-1)
+   }
+   else{
+      pi = pi - 4/(2*i-1)
+   }
+}
+pi
+```
+
+
+##### 문제6
+* X1,x2 두개의 matrix를 만들고 x3와 같이 열병합을 하시오
+
+![](C:/Users/haley/Desktop/haley/task/Rbasic/statistic_lecture/basic123/q6.jpg) 
+```{r}
+
+x1 = matrix(c(1,2,3,4),2,2)
+x2 = matrix(c(12,8,7,6,2,4),3,2)
+x3 = rbind(x1,x2)
+```
+
+##### 문제7
+* 아래와 같이 데이터 프레임을 만들고
+* 1)	M,F,I를 1,2,3으로 코딩하시오
+* 2)	AG가 20이고 GE 가 F만 추출
+* 3)	GE 가 M인 AG의 평균을 구하시오
+
+![](C:/Users/haley/Desktop/haley/task/Rbasic/statistic_lecture/basic123/q7.jpg) 
+
+```{r}
+gen = c("M","F","F","I","M")
+id = c(1,2,3,4,5)
+age = c(21,23,35,28,38)
+weight = c(47,52,40,55,48)
+x =data.frame(ID=id,GE=gen,AG=age,WE=weight)
+
+#1)
+x$GE = ifelse(x$GE=="M",1,ifelse(x$GE=="F",2,3))
+#2)
+x[x$AG>=20&x$AG<30&x$GE==2,]
+#3)
+mean(x[x$GE=="M",3])
+```
+
+##### 문제8
+* X = c(“qweerf=-123adklad”, “dklaj456asddfg”)
+  + 위 벡터에서 숫자만을 추출하시오(gsub 활용)
+  + `^`를 안에다가 사용할 결우 not의 의미가 된다
+```{r}
+X = c("qweerf=-123adklad", "dklaj456asddfg")
+gsub("[^0-9]","",X)
+```
+
+##### 문제9
+* 아래의 a,b벡터를 만들고
+  + Paste를 활용하여 c를 만들어보시오
+  
+![](C:/Users/haley/Desktop/haley/task/Rbasic/statistic_lecture/basic123/q9.jpg) 
+
+ 
+```{r}
+a = "오늘의 일기"
+b = c("오늘 점심은 햄버거를 먹었다", "친구와 함께 먹었다")
+
+c = paste(a,paste(b,collapse = " "),collapse = " ")
+```
+
+##### 문제10
+* x = "adefa"가 주어졌을때 'a'들의 위치를 출력하는 함수를 만드시오
+  + (nchar, substr 사용)
+  
+```{r}
+x = "adefa"
+f = function(x){
+	for(i in 1:nchar(x)){
+		if(substr(x,i,i)=="a"){
+			print(i)		}
+	}
+}
+f(x)
+```

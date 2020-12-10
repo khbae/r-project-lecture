@@ -1,0 +1,100 @@
+---
+title: '22'
+author: "jj"
+date: '2020 4 17 '
+output: html_document
+---
+---
+title: "Option Pricing With Monte-Carlo Simulation"
+author: '-'
+date: '2020 4 16 '
+output: html_document
+---
+
+## Tips. Option pricing with Monte Carlo Simulation
+  
+Assume the risk-free rate is 2%. Compute the option premium for the 6-month call with the exercise of $55 using
+Monte Carlo Simulation. Compare the option pre- mium in the simulation with the option value in Black-Scholes. 
+Check whether the value in Simulation converges to the option value in Black-Scholes as the number of simulations increases.
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(progress)
+```
+
+(1) Monte-Carlo Simulation
+
+```{r}
+
+inter = 100
+z = rnorm(inter, mean = 0, sd = 1)
+print(z)
+s0 = 50
+k = 55
+t = 0.5
+r = 0.02
+v = 0.3
+
+hist(z)
+plot(density(Z))
+ 
+
+# Compute a simulated Stock price, St
+St = S0 * exp((r - 0.5*v^2)*t + v*sqrt(t)*Z)
+St
+St = S0 * exp((r - 0.5*v^2)*t + v*sqrt(t)*Z)
+# Compute call option payoff at expiration, Ct
+Ct = ifelse(St-K > 0, St-K, 0)
+Ct
+E_Ct = mean(Ct)
+E_Ct
+
+# Risk-Neutral Valueation > Discounting expected payoff of thet call option at risk-free rate
+MC_C = exp(-r*t) * E_Ct
+MC_C
+
+```
+
+(2) Black-Sholes Option Pricing.
+
+```{r}
+d1 = (log(S0/K) + (r + (v^2)*0.5)*t) / (v*sqrt(t))
+d2 = d1 - v*sqrt(t)
+BS_C = S0 * pnorm(d1) - K*exp(-r*T) * pnorm(d2)
+MC_C; BS_C
+```
+
+(3) Check whether the value in Simulation Converges to the option value in Black-Scholes as the number of simulation increases.
+
+```{r}
+MC_call = function(S0, iter){
+  Z = rnorm(iter, mean = 0, sd = 1)
+  S0 = S0
+  K = K
+  t = 0.5
+  r = 0.02
+  v = 0.3
+  St = S0 * exp((r - 0.5*v^2)*t + v*sqrt(t)*Z)
+  Ct = ifelse(St-K > 0, St-K, 0)
+  E_Ct = mean(Ct)
+  C = exp(-r*t) * E_Ct
+  return(C)
+  
+}
+
+a = c()
+iter = 1000
+pb = progress_bar$new(total = iter)
+
+for (i in seq(1,1000)){
+  pb$tick()
+  Sys.sleep(0.01)
+  a[i] = MC_call(S0, i)
+}
+
+plot(a, type='o')
+abline(h = BS_C, col = 'blue')
+MC_C; BS_C
+
+```

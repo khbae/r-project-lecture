@@ -1,0 +1,60 @@
+---
+title: "시각화 문제"
+author: "hyo"
+date: '2020 4 5'
+output: html_document
+---
+##### 문제1
+* x변수에 -1부터 1까지 100개의 데이터 저장
+* y변수에 x변수를 지수화한 데이터 저장 
+* main title을 "y=exp(x)"로 y label을 exp(x)로 출력하시오
+* 점선으로 표시 하되 색은 orange로 표시
+
+##### 문제2
+* FCX.csv 파일을 읽은 후 Adj_Close 변수를 선택하여 baxplot과 histogram을 그리시오
+  + 두개의 plot이 동시에 나오게끔 코드를 작성하시오 (왼쪽 histogram, 오른쪽 boxplot)
+
+##### 문제3
+* 문제2의 histogram을 ggplot을 활용하여 그리시오 binwidth = 1로 설정하고 red로 색을 지정하시오
+  + main title은 "histogram"으로 지정
+
+##### 문제4
+*  ggplot에 있는 diamond 데이터 확인
+  + 변수 cut(품질)에 따라 자료를 그룹으로 나누어 그룹별 boxplot을 하나의 그림에 겹쳐서 그려보시오
+  + 이상값을 green 색깔로 표현
+
+
+##### 문제5
+![](C:/Users/haley/Desktop/haley/task/Rbasic/statistic_lecture/시각화/pic1.PNG)
+
+* FCX 데이터를 위 표와 같이 형태를 바꾸어준다
+  + Date, Open, Adi_Close 선택
+  + 위 표 같이 pivot_longer을 사용하여 데이터 처리
+* 날짜변수를 x, Value를 그룹으로 하여 price를 시각화 하시오
+
+
+##### 문제6
+* 위 그림을 line과 함께 point를 같이 접목시켜 시각화 해보시오
+
+
+##### 문제7
+* 위 그림을 각각의 그림으로 나누어 그리시오
+  + `facet_grid()` 혹은 `facet_wrap()` 함수 사용
+  
+
+##### 문제8
+* FCX의 Open 가격의 히스토그램을 그린 뒤  정규분포인지 여부를 확인 해보시오
+  + 히스토그램의 색은 blue로 채우기
+  + density의 값은 default
+
+
+##### 문제9
+* FCX의 Date변수를 year month day로 분리 
+  + Adj_Close의 월별 최댓값을 계산하여 Max_Adj_Close에 저장
+  + 막대그래프로 표현
+  + Max_Adj_Close가 평균보다 작으면 red, 크거나 같으면 blue로 표시
+
+##### 문제10
+* FCX 데이터 중 Volume를 제외한 모든 변수들의 boxplot을 ggplot을 이용하여 그리시오
+
+

@@ -1,0 +1,410 @@
+---
+title: "문서화"
+author: "hyo"
+date: '2020 4 1'
+output: html_document
+---
+
+## 7. 문서화
+* 모든 과정의 마무리 단계
+* rmarkdown을 이용한 문서화(html, pdf)와 shiny를 통한 앱 개발
+
+### 7.1 rmarkdown이란?
+* 문서 내에서 코드(R, 파이썬 등)와 텍스트를 동시에 사용가능
+* R Markdown = knitr + Pandoc Markdown
+* Markdown 
+    + 일반적인 웹페이지는 마크업 언어(html: HyperText Markup Language)로 구성
+    + 각종 태그를 이용하여 작성해야 하는 번거로움
+    + 마크다운의 경우 간단한 특수기호와 문자를 이용하여 구조적인 웹문서를 빠르게 작성
+* Rmarkdown에서는 Markdown 외에도 latex, html(css)도 직접 사용 가능
+
+* 문서화 과정 
+    + Rmd로 문서를 작성
+    + knitr 패키지가 R 코드를 실행 한 후 md 파일로 변환
+    + pandoc 패키지가 각종 결과물로 변환 (HTML, PDF, Word, Presentation 등)
+    
+![](C:/Users/haley/Desktop/haley/task/Rbasic/statistic_lecture/rmd/pic1.png) 
+
+* [File → New File → R Markdown] 클릭하여 파일 생성 가능
+* 크게 3가지 부분으로 구성됨 
+    + YAML Header: 메타 데이터 부분. 문서의 전반적인 스타일 정의
+    + code chunk: 코드 입력 부분
+    + markdown: 텍스트 부분
+    
+![](C:/Users/haley/Desktop/haley/task/Rbasic/statistic_lecture/rmd/pic2.png) 
+
+##### YAML Header
+* YAML Ain’t Markup Language
+* 제목, 출력물 형태, css 스타일 등을 정의
+* 최상단에 위치하며, — 를 통해 정의
+* :를 통해 구분하며, 각 하부 내용은 엔터 후 띄어쓰기 2칸을 입력
+
+
+---
+title: "R Markdown"
+author: "배경훈"
+date: "2020-03-27"
+output:
+  html_document:
+    toc: yes
+    toc_float: yes
+    toc_depth: 2
+    number_sections: TRUE
+header-includes:
+- \usepackage{booktabs}
+---
+
+* 각 내용은 다음과 같음 
+    + title: 제목
+    + author: 저자
+    + date: 날짜
+    + output: 출력 형태 
+      + toc: table of content. 목차 생성 여부
+      + toc_float: 목차가 유동적으로 움직일지 여부
+      + toc_depth: 목차의 depth
+      + number_section: 제목에 숫자를 부여할지 여부
+    + header-includes: 헤드 부분에 들어갈 내용 
+      + \usepackage: 사용할 latex
+* 출력 형태 별 YAML 예시: https://rmarkdown.rstudio.com/formats.html
+
+##### Code Chunk
+* 코드를 입력하는 부분
+* ```{r}과 ```을 통해 코드 부분 지정 (r 대신 python도 가능)
+* ctrl + alt + I를 통해 입력 가능
+
+![](C:/Users/haley/Desktop/haley/task/Rbasic/statistic_lecture/rmd/code1.png) 
+
+
+* 코드 청크 우측 상단의 초록색 삼각형(▶)을 클릭하면 해당 부분의 코드가 실행됨
+* 위 코드를 실행하면 다음과 같이 나옴
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+* 각종 옵션(예: echo=FALSE)을 조정하여 원하는 형태로 코드가 출력되게 할 수 있음
+* https://rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf
+* https://yihui.org/knitr/options/
+
+### 7.2 Rmarkdown의 시작
+#### 7.2.1 주석 입력하기
+<div style="background-color:#F7F7F7;padding: 5px">
+* `#`을 몇개를 사용하냐에 따라 글자의 크기가 달라짐
+</div>
+
+# 1개일경우
+## 2개 일경우
+### 3개일경우
+##### 4개일경우
+###### 5개 일경우
+
+<div style="background-color:#F7F7F7;padding: 5px">
+* `*`,`+`을 사용하면 아래와 같은 결과가 나옴
+</div>
+
+* 별을 사용하여 주석달기
+  + 플러스를 사용하여 주석달기
+
+
+
+
+
+##### Markdown Text
+* 마크다운 문법을 이용해 텍스트를 입력
+* https://www.markdownguide.org/basic-syntax/
+* 일반적인 마크다운과 사용법이 동일하며, Latex를 이용해 수식도 입력 가능
+
+##### 수식 출력
+* 수식의 경우 인라인에 삽입할 경우 `$수식$`, 새로운 줄에 삽입할 경우 `$$수식$$`을 입력하여 출력 가능
+
+![](C:/Users/haley/Desktop/haley/task/Rbasic/statistic_lecture/rmd/code2.png) 
+
+
+
+
+* 위 내용을 출력하면 다음과 같음
+
+$$R_{i} - R_f = \alpha\ + \beta_1(R_m - R_f) + \beta_2SMB + \beta_3HML$$
+
+회귀식은 일반적으로 y=ax+b이며, 3 Factor 모형은 다음과 같습니다. 
+Ri−Rf=α +β1(Rm−Rf)+β2SMB+β3HML
+
+* 수식이 길어질 경우 latex를 이용하면 깔끔하게 표현할 수 있음
+
+![](C:/Users/haley/Desktop/haley/task/Rbasic/statistic_lecture/rmd/code3.png) 
+
+
+<div style="background-color:#F7F7F7;padding: 5px">
+* latex의 경우 `$$`와 다르게 바로 렌더링 되지 않으므로 먼저 `$$`를 통해 수식이 맞게 표현되었는지 확인
+* &=은 정렬을 할 위치를 나타내며, `\\`는 줄바꿈을 의미
+* 위 내용을 출력하면 다음과 같음
+</div>
+
+
+
+\begin{equation} 
+\begin{split}
+\hat \beta_{OLS} & = (X'X)^{-1}X'Y \\
+& = (X'X)^{-1}X'(X\beta+\epsilon) \\
+& = (X'X)^{-1}X'X\beta + (X'X)^{-1}X'\epsilon \\
+& = \beta + (X'X)^{-1}X'\epsilon 
+\end{split}
+\end{equation} 
+
+
+
+##### 행렬 출력
+
+* 행렬 역시 latex를 이용해 출력 가능
+![](C:/Users/haley/Desktop/haley/task/Rbasic/statistic_lecture/rmd/code4.png) 
+
+<div style="background-color:#F7F7F7;padding: 5px">
+* 각 행렬 앞뒤로 begin{bmatrix}와 end{bmatrix}를 정의
+* `$`은 오른쪽으로 이동, `\\`는 줄 바꿈
+* 위 내용을 출력하면 다음과 같음
+</div>
+
+
+
+\begin{equation} 
+\begin{split}
+
+\epsilon \epsilon' &=
+\begin{bmatrix} \epsilon_1 \\ \epsilon_2 \\ \vdots \\ \epsilon_n \\ \end{bmatrix}
+\begin{bmatrix} \epsilon_1 & \epsilon_2 \dots \epsilon_n \end{bmatrix} \\
+&= \begin{bmatrix} 
+\epsilon_{1}\epsilon_{1} & \epsilon_{1}\epsilon_{2} & \dots & \epsilon_{1}\epsilon_{n} \\
+\epsilon_{2}\epsilon_{1} & \epsilon_{2}\epsilon_{2} & \dots & \epsilon_{2}\epsilon_{n} \\
+\vdots & \vdots & \ddots & \vdots \\
+\epsilon_{n}\epsilon_{1} & \epsilon_{n}\epsilon_{2} & \dots & \epsilon_{n}\epsilon_{n}
+\end{bmatrix}
+
+\end{split}
+\end{equation} 
+
+
+
+##### HTML, CSS 적용
+* HTML과 CSS를 입력할 경우 그대로 적용되어 출력됨
+* markdown으로 표현에 한계가 있는 부분은 css를 이용해 직접 표현
+
+![](C:/Users/haley/Desktop/haley/task/Rbasic/statistic_lecture/rmd/code5.png) 
+
+
+
+* 위 내용을 출력하면 다음과 같음
+
+<div style="background-color:#F7F7F7;padding: 5px">
+이 부분의 배경은 회색으로 표현됩니다.
+</div>
+
+
+#### 7.2.2 표만들기
+
+* 마크다운 문법으로 표를 출력하기에는 한계가 있으므로, data.frame이나 tibble 형태의 표를 만든 후 kable() 함수로 변환하여 출력하는 것이 훨씬 효율적
+* 3 Factor의 2018~2019년 데이터를 이용해 다음과 같은 테이블을 생성 후 출력
+
+```{r}
+library(dplyr)
+library(stringr)
+library(tidyr)
+setwd("C:/Users/haley/Desktop/haley/task/Rbasic/statistic_lecture/rmd")
+ff_mod = read.csv("ff_mod.csv")
+ff_select = ff_mod %>%
+  filter(str_sub(Date, 1, 4) %in% c(2018, 2019))
+
+print(ff_select)
+
+
+ff_1819 = ff_select %>%
+  separate(Date, c('Year', 'Month'), sep = '-') 
+
+print(ff_1819)
+```
+
+* knitr 패키지의 kable() 함수를 이용해 테이블 형태로 출력 가능
+
+```{r}
+library(knitr)
+
+ff_1819 %>%
+  kable()
+```  
+
+* kableExtra 패키지의 kable_styling() 함수를 추가하여 깔끔한 html 형태로 출력
+
+```{r}
+library(kableExtra)
+
+ff_1819 %>%
+  kable() %>%
+  kable_styling(c("striped", "bordered"))
+```
+
+* kableExtra, formattable 패키지를 이용해 html로 훨씬 깔끔하게 원하는 형태로 표현할 수 있음
+* https://cran.r-project.org/web/packages/kableExtra/vignettes/awesome_table_in_html.html
+
+```{r}
+library(formattable)
+
+ff_1819_html = ff_1819 %>%
+  pivot_longer(cols = -c(Year, Month), names_to = 'factor',
+               values_to = 'return') %>%
+  mutate(return_per = paste0(return * 100, '%')) %>%
+  mutate(return_per = cell_spec(return_per, 
+                                color = ifelse(return > 0, "red", "blue"))) %>%
+  pivot_wider(id_cols = c(Year, Month),
+              names_from = factor,
+              values_from = return_per)
+
+print(ff_1819_html)
+```
+
+```{r}
+ff_1819_html %>%
+  kable(escape = F, full_width = T, align = "r") %>%
+  kable_styling(c("striped", "bordered")) %>%
+  collapse_rows(columns = 1, valign = "top") %>%
+  add_header_above(c("Date"= 2, "Factor" = 4))
+```
+
+* DT 패키지를 이용해 datatable 형태의 인터랙티브 테이블 출력 가능
+* https://rstudio.github.io/DT/
+* https://datatables.net/
+
+```{r}
+library(DT)
+
+ff_1819 %>%
+  pivot_longer(cols = -c(Year, Month), names_to = 'factor',
+               values_to = 'return') %>%
+  mutate(return_per = paste0(return * 100, '%')) %>%
+    mutate(return_per = cell_spec(return_per, 
+                                color = ifelse(return > 0, "red", "blue"))) %>%
+  pivot_wider(id_cols = c(Year, Month),
+              names_from = factor,
+              values_from = return_per) %>%
+  datatable(escape = FALSE,
+            rownames= FALSE,
+            extensions = 'Buttons',
+            options = list(pageLength = 12,
+                           dom = 'Bfrtip',
+                           buttons = c('copy', 'csv', 'excel', 'pdf'),
+                           columnDefs = list(list(className = 'dt-right', targets = "_all"))
+                           
+            
+                              ))
+```                              
+
+#### 7.2.3 사진/그림 삽입
+* 그림이 저장된 폴더에서 그림의 [속성] -> [보완] -> [개체 이름] 복사 후 아래와 같이 작성한다
+
+  + `![](C:/Users/haley/Desktop/haley/task/Rbasic/statistic_lecture/rmd/img.png)`
+
+![](C:/Users/haley/Desktop/haley/task/Rbasic/statistic_lecture/rmd/img2.png) 
+![](C:/Users/haley/Desktop/haley/task/Rbasic/statistic_lecture/rmd/img1.png)
+
+
+
+##### 그래프 출력
+* 일반적으로 ggplot 이용
+
+```{r}
+library(ggplot2)
+ff_select %>%
+  select(Date, 2:4) %>%
+  mutate_if(is.numeric, list(~log(1+.) %>% cumsum() )) %>%
+  pivot_longer(cols = -Date, names_to = 'factor',
+               values_to = 'return') %>%
+  ggplot(aes(x = Date, y = return, group = factor)) +
+  geom_line(aes(color = factor)) +
+  geom_point(aes(color = factor))
+```  
+
+
+* highcharter 등의 패키지를 이용해 인터랙티브 그래프도 표현 가능
+* https://www.highcharts.com/blog/data-science/highcharts-for-r-users/
+* http://jkunst.com/highcharter/
+* javascript를 기반으로 하므로, 이를 적용하여 원하는 형태로 변경 가능 
+    + https://api.highcharts.com/highcharts/
+    
+```{r}  
+library(highcharter)
+
+ff_select %>%
+  select(Date, 2:4) %>%
+  mutate_if(is.numeric, list(~log(1+.) %>% cumsum() )) %>%
+  pivot_longer(cols = -Date, names_to = 'factor',
+               values_to = 'return') %>% 
+  hchart(., 
+         type = "line", 
+         hcaes(x = Date, 
+               y = return, 
+               group = factor)) %>% 
+  hc_yAxis(title = '',
+           opposite = TRUE,
+           labels = list(format = "{value}")) %>%
+  hc_xAxis(title = '') %>%
+  hc_tooltip(pointFormat = '{point.y: .4f}')
+```
+
+##### 각주 삽입
+* 각주를 삽입하고 싶은 단어의 뒤에 `^[내용]`을 입력하면, 페이지 최하단에 각주가 생성됨
+* 예: 각주를 삽입하고 싶을 시, `이곳^[원하는 내용을 입력하세요]`에 원하는 단어를 쓰시면 됩니다.
+
+<div style="background-color:#F7F7F7;padding: 5px">
+각주를 삽입하고 싶을 시, `이곳1`에 원하는 단어를 쓰시면 됩니다.
+</div>
+
+##### Reference 추가
+* 참고문헌(Reference) 추가는 bib 파일 이용
+* 먼저 https://scholar.google.com/ 에서 원하는 논문을 찾아 BibTeX 복사
+
+![](C:/Users/haley/Desktop/haley/task/Rbasic/statistic_lecture/rmd/pic4.png) 
+
+* 복사한 내용을 article.bib 파일에 저장
+
+@article{fama1993common,
+  title={Common risk factors in the returns on stocks and bonds},
+  author={Fama, Eugene F and French, Kenneth R},
+  journal={Journal of financial economics},
+  volume={33},
+  number={1},
+  pages={3--56},
+  year={1993},
+  publisher={Elsevier}
+}
+
+
+* YAML 헤더에 다음 내용을 추가 
+    + bibliography: [article.bib]
+    + 여러개의 bib 파일 사용할 경우 bibliography: [a.bib, b.bib] 형태로 추가
+    
+---
+title: "R Markdown"
+author: "배경훈"
+date: "2020-03-27"
+output:
+  html_document:
+    toc: yes
+    toc_float: yes
+    toc_depth: 2
+    number_sections: TRUE
+bibliography: [article.bib]
+---
+
+
+* 참고 문헌임을 밝히고 싶은 위치에 다음과 같이 입력 
+    + `@` 뒷부분에 bib에서 저장한 article 이름(fama1993common)을 입력
+
+![](C:/Users/haley/Desktop/haley/task/Rbasic/statistic_lecture/rmd/code6.png) 
+
+* 이를 출력하면 다음과 같이 나타남 
+<div style="background-color:#F7F7F7;padding: 5px">
+3 팩터 모형은 파마-프렌치(Fama and French 1993)에 의해 정의되었습니다.
+</div>
+
+
+* Reference 페이지 생성을 위해 파일 가장 하단에 다음과 같이 입력 
+    + `# Reference{-}`
+    + `{-}`는 number section을 생성하지 않는 다는 의미
+    + 페이지의 가장 마지막에 Reference 페이지가 나타나며, bib에 저장된 모든 문헌이 나타나게 됨
