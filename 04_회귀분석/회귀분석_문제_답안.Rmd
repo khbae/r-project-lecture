@@ -1,0 +1,109 @@
+---
+title: "Regression_example"
+author: "hyo"
+date: '2020 5 25 '
+output: html_document
+---
+
+### 문제1 
+#### 라이브러리 regbook 안에 있는 aflength 데이터를 사용하여 회귀분석을 시행하여라
+  + `install.packages("devtools");library(devtools);install_github("regbook/regbook")` 실행 후 데이터 사용
+
+```{r}
+#install.packages("devtools")
+#library(devtools)
+#install_github("regbook/regbook")
+library(regbook)
+```
+
+##### 1) 데이터를 head()를 사용하여 확인하고 종속변수를 foot, 설명변수를 forearm으로 하여 산점도를 확인해보고 대략적인 상관관계를 설명하시오
+```{r}
+head(aflength)
+plot(foot~forearm, data=aflength) #양의 상관관계
+```
+
+##### 2) 위의 두 변수간의 상관관계를 수치로 구하고 두변수간의 관계를 설명하시오
+```{r}
+cor(aflength$foot, aflength$forearm)
+#-1~1 사이 값으로 0,985는 1에 매우 가까우며 높은 양의 상관관계를 갖는다
+```
+
+#### 3) 단순 회귀 분석을 시행하시오
+  + plot 및 분석 결과 설명 
+```{r}
+# foot = -12.419 + 1.052*forearm
+# forearm의 p-value값을 확인 해보면 <2e-16으로 매우 유의한 값을 갖는 것을 확인 할 수 있다
+# forearm이 한단위 증가함에 따라 foot의 값은 평균적으로 1.052만큼 증가한다
+# Adjusted R-squared:  0.9712 이므로 선형관계가 높음을 알수 있다
+aflength.lm <- lm(foot~forearm, data=aflength)
+summary(aflength.lm)
+
+# plot
+plot(foot~forearm, data=aflength) 
+abline(aflength.lm)
+```
+
+### 문제2 
+#### 중고차 가격자료 `usedcars`에 대한 회귀분석에서 가격(price)에 대해
+  + 1) 각 회귀계수가 0이라는 가설에 대한 t검정을 하여라
+  + 2) 각 회귀계수에 대한 95% 신뢰구간을 구하여라
+```{r}
+# 귀무가설 : 독립변수와 종속변수간의 유의한 상관관계가 존재하지않는다
+# 대립가설 : 독립변수와 종속변수간의 유의한 상관관계가 존재한다 
+# p-value값을 살펴보면 cc를 제외한 변수는 < 0.05이므로 유의수준 5%하에서 귀무가설을 기각할만한 충분한 근거가된다. 따라서 종속변수와 독립변수간의 유의한 상관관계가 있다고 말 할 수 있지만 CC변수는 귀무가설을 기각하지 못한다
+
+# 
+data(usedcars)
+usedcars.lm = lm(price ~ .,usedcars)
+summary(usedcars.lm)
+
+#R에서 회귀계수에 대한 신뢰구간은 다음과 같이 얻을 수 있다
+confint(usedcars.lm)
+```
+
+### 문제3 
+#### 위 데이터에 대한 회귀분석 문제에서 Y의 평균에 대한 신뢰구간과 새로운 Y값에 대한 예측구간을 다음 경우에 대해 각각 구해보자
+  + year = 60, mileage = 100000, cc = 2000, automatic = 1
+```{r}
+# 새로운 값을 이용하여 예측할 때에는 새로운 데이터프레임을 만들어야한다
+nw = data.frame(year = 60, mileage = 100000, cc = 2000, automatic = 1)
+nw
+#95% 신뢰구간 (821.1568, 966.6666)
+predict(usedcars.lm,newdata=nw,interval = "confidence")
+
+#95% 예측구간 (673.3444, 1114.479()
+predict(usedcars.lm,newdata=nw,interval = "prediction")
+```
+
+### 문제4 
+#### 자료 'hald'는 1932년 미국 화학공학 학회지에 발표된것으로, 시멘트가 굳을때 발생하는 열량에 시멘트의 네가지 성분들이 미치는 영향을 분석한 것이다. `data(hald)`를 사용하여 y에 대해 x변수들의 다중공선성의 유무를 판단하시오
+
+```{r}
+data(hald)
+hald.lm1 = lm(y~.,hald)
+# x1의 p-value값이 0.1 기준으로 유의한 변수라고 할 수 있다
+summary(hald.lm1)
+# vif 값을 살펴 보면 X2와 X4의 값이 가장 큰 것을 확인 할 수 있다.
+# 두 변수 사이에 선형종속관계가 존재한다고 판단되어지므로 분석 시 가장 크게 나온 X4의 변수를 제거하고 다시 분석을 진행한다.
+vif(hald.lm1)
+
+hald.lm2 = lm(y~x1+x2+x3,hald)
+# x1의 p-value값이 0.1 기준으로 유의한 변수라고 할 수 있다
+summary(hald.lm2)
+```
+
+### 문제5 
+#### 위 데이터를 dplyr를 활용하여 회귀분석을 시행하시오
+  + 힌트 : do(reg=lm(Y~X1+X2+X3,data=.))를 통해 회귀식을 구성한다
+```{r}
+library(dplyr)
+library(broom)
+library(devtools)
+
+hald_reg = hald %>% do(reg=lm(y~x1+x2+x3,data=.))
+ANOVAreg = hald_reg %>% rowwise %>% do(anova(.$reg))             #ANOVA result
+ANOVAreg=as.data.frame(ANOVAreg)
+ANOVAreg
+
+tidy(hald_reg,reg)  
+```
