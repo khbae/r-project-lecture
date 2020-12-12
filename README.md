@@ -22,4 +22,6 @@
 
 [Chapter 10 - Macro](https://khbae.github.io/r-project-lecture/10_SAS/rmd_macro_in_r.html)
 
-[Chapter 11 - dplyr-regression](https://khbae.github.io/r-project-lecture/dplyr_regression/dplyr_regression.html)
+[Chapter 11 - Stargazer](./11_Stargazer/tabular.R)
+
+[Chapter 12 - dplyr-regression](https://khbae.github.io/r-project-lecture/dplyr_regression/dplyr_regression.html)
