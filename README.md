@@ -24,4 +24,6 @@
 
 [Chapter 11 - Stargazer](./11_Stargazer/tabular.R)
 
-[Chapter 12 - dplyr-regression](https://khbae.github.io/r-project-lecture/dplyr_regression/dplyr_regression.html)
+[Chapter 12 - Cheatsheet](./12_cheatsheet/)
+
+[dplyr-regression](https://khbae.github.io/r-project-lecture/dplyr_regression/dplyr_regression.html)
