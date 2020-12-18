@@ -27,3 +27,6 @@
 [Chapter 12 - Cheatsheet](./12_cheatsheet/)
 
 [dplyr-regression](https://khbae.github.io/r-project-lecture/dplyr_regression/dplyr_regression.html)
+
+
+https://holtzy.github.io/Pimp-my-rmd/
