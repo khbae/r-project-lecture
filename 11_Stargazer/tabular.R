@@ -5,7 +5,7 @@ is(out)
 
 tabular <- function(stargazer.out,file.name){
   out = head(stargazer.out[-1:-6],-1) 
-  cat(paste(out2, collapse="\n"),sep="\n",file = file.name)
+  cat(paste(out, collapse="\n"),sep="\n",file = file.name)
 }
 
 iris %>% 
