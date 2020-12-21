@@ -30,3 +30,6 @@
 
 
 https://holtzy.github.io/Pimp-my-rmd/
+
+https://plotly.com/r/
+
