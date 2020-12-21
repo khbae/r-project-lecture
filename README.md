@@ -20,6 +20,7 @@
 [Chapter 8a - Github](https://khbae.github.io/r-project-lecture/08_gitbub/github_1.html)
 
 [Chapter 8b - Github](https://khbae.github.io/r-project-lecture/08_gitbub/github_2.html)
+* https://backlog.com/git-tutorial/kr/stepup/stepup1_1.html
 
 [Chapter 9 - Shiny](https://khbae.github.io/r-project-lecture/09_shiny/Rshiny강의안.html)
 
