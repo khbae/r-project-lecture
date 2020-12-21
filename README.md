@@ -13,6 +13,7 @@
 
 [Chapter 6 - Documentation](https://khbae.github.io/r-project-lecture/06_문서화/rmarkdown.html)
 * https://holtzy.github.io/Pimp-my-rmd/
+* https://bookdown.org/yihui/rmarkdown/html-document.html
 
 [Chapter 7 - Chatbot](https://khbae.github.io/r-project-lecture/07_chatbot/chatbot.html)
 
