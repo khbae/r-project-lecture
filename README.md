@@ -5,12 +5,14 @@
 [Chapter 2 - Package & Data Management](https://khbae.github.io/r-project-lecture/02_패키지란_데이터처리/데이터처리.html)
 
 [Chapter 3 - Visualization](https://khbae.github.io/r-project-lecture/03_시각화/visualization.html)
+* https://plotly.com/r/
 
 [Chapter 4 - Regression](https://khbae.github.io/r-project-lecture/04_회귀분석/회귀분석.html)
 
 [Chapter 5 - Crawling](https://khbae.github.io/r-project-lecture/05_크롤링/크롤링.html)
 
 [Chapter 6 - Documentation](https://khbae.github.io/r-project-lecture/06_문서화/rmarkdown.html)
+* https://holtzy.github.io/Pimp-my-rmd/
 
 [Chapter 7 - Chatbot](https://khbae.github.io/r-project-lecture/07_chatbot/chatbot.html)
 
@@ -29,7 +31,7 @@
 [dplyr-regression](https://khbae.github.io/r-project-lecture/dplyr_regression/dplyr_regression.html)
 
 
-https://holtzy.github.io/Pimp-my-rmd/
 
-https://plotly.com/r/
+
+
 
