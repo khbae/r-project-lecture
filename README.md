@@ -21,6 +21,7 @@
 
 [Chapter 8b - Github](https://khbae.github.io/r-project-lecture/08_gitbub/github_2.html)
 * https://backlog.com/git-tutorial/kr/stepup/stepup1_1.html
+* https://github.com/matteobrusa/Password-protection-for-static-pages
 
 [Chapter 9 - Shiny](https://khbae.github.io/r-project-lecture/09_shiny/Rshiny강의안.html)
 
