@@ -36,6 +36,5 @@
 
 [dplyr-regression](https://khbae.github.io/r-project-lecture/dplyr_regression/dplyr_regression.html)
 
-
-
+Parameters: https://rmarkdown.rstudio.com/lesson-6.html
 
