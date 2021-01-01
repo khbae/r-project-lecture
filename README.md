@@ -31,9 +31,10 @@
 
 [Chapter 12 - Cheatsheet](./12_cheatsheet/)
 
+[Chapter 13 - Running python in R](./13_python/)
+* https://rstudio.github.io/reticulate/index.html
+
 [dplyr-regression](https://khbae.github.io/r-project-lecture/dplyr_regression/dplyr_regression.html)
-
-
 
 
 
