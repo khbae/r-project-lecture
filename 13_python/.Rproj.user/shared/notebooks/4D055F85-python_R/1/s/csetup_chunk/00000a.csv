@@ -1,0 +1,16 @@
+"0","use_condaenv(""kbenv"")"
+"0","py_discover_config()"
+"1","python:         /Users/kyounghunbae/anaconda3/envs/kbenv/bin/python
+libpython:      /Users/kyounghunbae/anaconda3/envs/kbenv/lib/libpython3.6m.dylib
+pythonhome:     /Users/kyounghunbae/anaconda3/envs/kbenv:/Users/kyounghunbae/anaconda3/envs/kbenv
+version:        3.6.12 | packaged by conda-forge | (default, Dec  9 2020, 00:24:39)  [GCC Clang 11.0.0]
+numpy:          /Users/kyounghunbae/anaconda3/envs/kbenv/lib/python3.6/site-packages/numpy
+numpy_version:  1.19.4
+
+python versions found: 
+ /Users/kyounghunbae/anaconda3/envs/kbenv/bin/python
+ /usr/bin/python
+ /usr/bin/python3
+ /usr/local/bin/python3
+ /Users/kyounghunbae/anaconda3/bin/python
+"

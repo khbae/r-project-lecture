@@ -1,0 +1,3 @@
+"0","rm(list=ls())"
+"0","library(reticulate)"
+"0","conda_list()"

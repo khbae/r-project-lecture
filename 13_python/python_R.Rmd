@@ -1,0 +1,48 @@
+---
+title: "Python in R"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+rm(list=ls())
+library(reticulate)
+conda_list()
+use_condaenv("kbenv")
+py_discover_config()
+```
+
+```{python}
+import nltk
+from nltk.tokenize import word_tokenize
+from nltk.stem import PorterStemmer
+from nltk.corpus import stopwords
+from nltk.stem.snowball import SnowballStemmer
+import collections
+import re
+import pandas as pd
+import numpy as np
+import unicodedata
+import glob
+import pickle
+import os 
+import matplotlib.pyplot as plt
+from sklearn.metrics.pairwise import cosine_similarity
+from sklearn.preprocessing import StandardScaler
+import coclust.clustering as co
+from collections import Counter
+from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
+from keras.layers import Input, Dense
+from keras.models import Model
+from keras import regularizers
+from keras import optimizers
+from soyclustering import SphericalKMeans
+import scipy
+from datetime import datetime
+from numpy import average
+```
+
+## Autoencoder Learning ##
+
+```{python}
+dim01 = 10
+```
