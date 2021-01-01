@@ -38,3 +38,4 @@
 
 Parameters: https://rmarkdown.rstudio.com/lesson-6.html
 
+Build website : https://laurae2.github.io/pkgdown/index.html
