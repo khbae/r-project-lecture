@@ -10,6 +10,7 @@
 [Chapter 4 - Regression](https://khbae.github.io/r-project-lecture/04_회귀분석/회귀분석.html)
 
 [Chapter 5 - Crawling](https://khbae.github.io/r-project-lecture/05_크롤링/크롤링.html)
+* https://cran.r-project.org/web/packages/RSelenium/vignettes/basics.html
 
 [Chapter 6 - Documentation](https://khbae.github.io/r-project-lecture/06_문서화/rmarkdown.html)
 * https://holtzy.github.io/Pimp-my-rmd/
