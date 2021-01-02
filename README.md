@@ -33,6 +33,7 @@
 
 [Chapter 13 - Running python in R](./13_python/)
 * https://rstudio.github.io/reticulate/index.html
+* https://github.com/rstudio/reticulate/issues/637
 
 [dplyr-regression](https://khbae.github.io/r-project-lecture/dplyr_regression/dplyr_regression.html)
 
