@@ -39,3 +39,5 @@
 Parameters: https://rmarkdown.rstudio.com/lesson-6.html
 
 Build website : https://laurae2.github.io/pkgdown/index.html
+
+Environments for R: https://blog.rstudio.com/2019/11/06/renv-project-environments-for-r/
