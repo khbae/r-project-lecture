@@ -6,9 +6,10 @@ output: html_document
 ```{r setup, include=FALSE}
 rm(list=ls())
 library(reticulate)
-conda_list()
-use_condaenv("kbenv")
-py_discover_config()
+use_condaenv("kbenv", required = TRUE)
+py_config()
+#py_discover_config()
+#conda_list()
 ```
 
 ```{python}
