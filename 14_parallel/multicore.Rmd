@@ -1,0 +1,214 @@
+---
+title: "Parallel computing examples"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## parLapply
+
+```{r, echo=TRUE}
+rm(list=ls())
+library(doParallel)
+
+# sample function
+len <- 1e6
+a <- runif(len, -10, 10)
+a[sample(len, 100,replace=TRUE)] <- 0
+
+b <- runif(len, -10, 10)
+c <- runif(len, -10, 10)
+
+# Not vectorized function
+solve.quad.eq <- function(a, b, c) 
+{
+  # Not validate eqution: a and b are almost ZERO
+  if(abs(a) < 1e-8 && abs(b) < 1e-8) return(c(NA, NA) )
+  
+  # Not quad equation
+  if(abs(a) < 1e-8 && abs(b) > 1e-8) return(c(-c/b, NA))
+  
+  # No Solution
+  if(b*b - 4*a*c < 0) return(c(NA,NA))
+  
+  # Return solutions
+  x.delta <- sqrt(b*b - 4*a*c)
+  x1 <- (-b + x.delta)/(2*a)
+  x2 <- (-b - x.delta)/(2*a)
+  
+  return(c(x1, x2))
+}
+
+#1. lapply
+system.time(
+  res1.s <- lapply(1:len, FUN = function(x) { solve.quad.eq(a[x], b[x], c[x])})
+)
+
+#2. parLapply
+cores <- detectCores(logical = FALSE)
+cl <- makeCluster(cores)
+clusterExport(cl, c('solve.quad.eq', 'a', 'b', 'c'))
+system.time(
+  res1.p <- parLapply(cl, 1:len, function(x) { solve.quad.eq(a[x], b[x], c[x]) })
+)
+stopCluster(cl)
+
+```
+
+## foreach
+
+```{r, echo=TRUE}
+
+rm(list=ls())
+library(foreach)
+library(doParallel)
+
+#setup parallel backend to use many processors
+cores=detectCores()
+cl <- makeCluster(cores[1]-1) #not to overload your computer
+registerDoParallel(cl)
+
+#1. multicore
+x <- iris[which(iris[,5] != "setosa"), c(1,5)] 
+trials <- 10000 
+ptime <- system.time({ 
+  r <- foreach(1:trials, .combine=cbind) %dopar% 
+    { 
+      ind <- sample(100, 100, replace=TRUE) 
+      result1 <- glm(x[ind,2]~x[ind,1], family=binomial(logit)) 
+      coefficients(result1) 
+    } 
+}) 
+ptime[3] 
+
+#2. same as for loop
+x <- iris[which(iris[,5] != "setosa"), c(1,5)] 
+trials <- 10000 
+stime <- system.time({ 
+  r <- foreach(1:trials, .combine=cbind) %do% 
+    { 
+      ind <- sample(100, 100, replace=TRUE) 
+      result1 <- glm(x[ind,2]~x[ind,1], family=binomial(logit)) 
+      coefficients(result1) 
+    } 
+}) 
+stime[3] 
+
+#stop cluster
+stopCluster(cl)
+
+```
+
+## snowfall
+
+```{r, echo=TRUE}
+rm(list=ls())
+library(snowfall)
+
+fib <- function(n)
+{
+  if (n < 1)
+    stop("Input must be an integer >= 1")
+  if (n == 1 | n == 2)
+    1
+  else
+    fib(n-1) + fib(n-2)
+}
+
+# 1. Initialisation of snowfall.
+# (if used with sfCluster, just call sfInit())
+sfInit(parallel=TRUE, cpus=4)
+
+# packages on workers.
+sfExport("fib")
+
+#1. snowfall lapply
+system.time(sfLapply(1:32, fib))
+
+#2. normal lapply
+system.time(lapply(1:32, fib))
+
+sfStop()
+
+```
+
+## future
+
+### sequential
+
+```{r, echo=TRUE}
+#1. Sequential (default R setting)
+library(future)
+
+plan(sequential)
+pid <- Sys.getpid()
+pid
+
+a %<-% {
+  pid <- Sys.getpid()
+  cat("Future 'a' ...\n")
+  3.14
+}
+b %<-% {
+  
+  cat("Future 'b' ...\n")
+  Sys.getpid()
+}
+c %<-% {
+  cat("Future 'c' ...\n")
+  2 * a
+}
+b
+c
+a
+pid
+```
+* a,b,c의 process id가 동일
+
+```{r, echo=TRUE}
+rm(list=ls())
+
+#2. multisession (parallel)
+library(future)
+
+plan(multisession)
+pid <- Sys.getpid()
+pid
+
+a %<-% {
+  pid <- Sys.getpid()
+  cat("Future 'a' ...\n")
+  3.14
+}
+b %<-% {
+  
+  cat("Future 'b' ...\n")
+  Sys.getpid()
+}
+c %<-% {
+  cat("Future 'c' ...\n")
+  2 * a
+}
+b
+c
+a
+pid
+
+plan(sequential) # get back to default
+```
+
+* b의 process id가 a,c와 다름
+
+## Note
+
+### mclapply는 윈도우에서 작동되지 않음
+
+### snow는 클러스터용 패키지로, 한 대의 컴퓨터에서 실행 시 역으로 성능저하 발생 가능
+
+### 2013년 전후로 많이 쓰였던 doSMP는 현재 CRAN에서 삭제됨
+
+## Summary
+
+### parallel computing에서 가장 많이 쓰이는 메소드는 foreach 패키지를 이용한 방법임. 그리고 주목할만한 또다른 메소드는 future 패키지이며, 가장 최근에 나온 패키지임. 이 때문에 인터넷 상에 다양한 예제가 많이 없다는 한계가 있음.
