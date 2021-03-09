@@ -36,6 +36,8 @@
 * https://rstudio.github.io/reticulate/index.html
 * https://github.com/rstudio/reticulate/issues/637
 
+[Chapter 13 - Running python in R](./14_parallel/multicore.html)
+
 [dplyr-regression](https://khbae.github.io/r-project-lecture/dplyr_regression/dplyr_regression.html)
 
 Parameters: https://rmarkdown.rstudio.com/lesson-6.html
